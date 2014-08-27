@@ -8,16 +8,16 @@
     <packaging>jar</packaging>
 
     <name>A cpviz extension for Choco3</name>
-    <url>https://github.com/chocoteam/CPViz</url>
+    <url>https://github.com/chocoteam/choco-cpviz</url>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <scm>
-        <connection>scm:git:git@github.com:chocoteam/CPViz.git</connection>
-        <url>scm:git:git://github.com/chocoteam/CPViz</url>
-        <developerConnection>scm:git:git@github.com:chocoteam/CPViz.git</developerConnection>
+        <connection>scm:git:git@github.com:chocoteam/choco-cpviz.git</connection>
+        <url>scm:git:git://github.com/chocoteam/choco-cpviz</url>
+        <developerConnection>scm:git:git@github.com:chocoteam/choco-cpviz.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
     <dependencies>
