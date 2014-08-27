@@ -1,7 +1,7 @@
 CPViz
 =====
 
-An extension of Choco3 to deal with [cpviz](https://sourceforge.net/projects/cpviz/) library.
+An extension of [Choco3](https://github.com/chocoteam/choco3) to deal with [cpviz](https://sourceforge.net/projects/cpviz/) library.
 
 Simply add the choco-cpviz-X.Y.Z.jar file to the classpath, together with choco-solver.X.Y.Z.jar, and add the following code, before the resolution:
 
