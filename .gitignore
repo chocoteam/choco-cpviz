@@ -1,0 +1,9 @@
+*/target/*
+*.iml
+*.ipr
+*.iws
+*.jar
+*.DS_Store
+configuration-*
+tree-*
+visualization-*

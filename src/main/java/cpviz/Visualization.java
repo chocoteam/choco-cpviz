@@ -40,7 +40,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-import static solver.search.loop.monitors.cpviz.CPVizConstant.*;
+import static cpviz.CPVizConstant.*;
 
 /**
  * A class to produce log files of a problem resolution.

@@ -27,12 +27,12 @@
 package cpviz.visualizers;
 
 import org.slf4j.Logger;
-import solver.search.loop.monitors.cpviz.Visualizer;
+import cpviz.Visualizer;
 import solver.search.strategy.decision.Decision;
 import solver.variables.IntVar;
 
-import static solver.search.loop.monitors.cpviz.visualizers.Writer._1;
-import static solver.search.loop.monitors.cpviz.visualizers.Writer._2;
+import static cpviz.visualizers.Writer._1;
+import static cpviz.visualizers.Writer._2;
 
 /**
  * A specialized visualizer for the lex less than constraint.

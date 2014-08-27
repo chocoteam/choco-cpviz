@@ -27,12 +27,12 @@
 package cpviz.visualizers;
 
 import org.slf4j.Logger;
-import solver.search.loop.monitors.cpviz.Visualizer;
+import cpviz.Visualizer;
 import solver.search.strategy.decision.Decision;
 import solver.variables.BoolVar;
 import solver.variables.IntVar;
 
-import static solver.search.loop.monitors.cpviz.visualizers.Writer.*;
+import static cpviz.visualizers.Writer.*;
 
 /**
  * A specialized visualizer for the boolean channeling constraint.

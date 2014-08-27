@@ -28,7 +28,7 @@ package cpviz.visualizers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import solver.search.loop.monitors.cpviz.CPVizConstant;
+import cpviz.CPVizConstant;
 import solver.variables.IntVar;
 import solver.variables.SetVar;
 import solver.variables.Variable;

@@ -27,11 +27,11 @@
 package cpviz.visualizers;
 
 import org.slf4j.Logger;
-import solver.search.loop.monitors.cpviz.Visualizer;
+import cpviz.Visualizer;
 import solver.search.strategy.decision.Decision;
 import solver.variables.Variable;
 
-import static solver.search.loop.monitors.cpviz.visualizers.Writer._S;
+import static cpviz.visualizers.Writer._S;
 
 /**
  * ,

@@ -27,7 +27,7 @@
 package cpviz;
 
 import org.slf4j.Logger;
-import solver.search.loop.monitors.cpviz.visualizers.Writer;
+import cpviz.visualizers.Writer;
 import solver.search.strategy.decision.Decision;
 
 /**
