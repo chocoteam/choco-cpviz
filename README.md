@@ -1,5 +1,5 @@
-CPViz
-=====
+choco-cpviz
+===========
 
 An extension of [Choco3](https://github.com/chocoteam/choco3) to deal with [cpviz](https://sourceforge.net/projects/cpviz/) library.
 
