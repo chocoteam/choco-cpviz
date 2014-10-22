@@ -98,14 +98,13 @@ public class DomainMatrix extends Visualizer {
         if (decision != null) {
             for (int i = 0; i < vars.length; i++) {
                 for (int j = 0; j < vars[i].length; j++) {
-                    if (decision/*.getBranchingObject()*/ == vars[i][j]) {
+                    if (decision.getDecisionVariable()== vars[i][j]) {
                         if (focus) {
                             writer.focus((i + 1) + _S + (j + 1), group);
                         } else {
-                            writer.fail((i + 1) + _S + (j + 1), group, -1/*decision.getBranchingValue()*/);
+                            writer.fail((i + 1) + _S + (j + 1), group, (Integer)decision.getDecisionValue());
                         }
                     }
-                    throw new UnsupportedOperationException();
                 }
             }
         }

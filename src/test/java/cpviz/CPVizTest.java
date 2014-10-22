@@ -26,11 +26,10 @@
  */
 package cpviz;
 
+import cpviz.visualizers.*;
 import org.testng.annotations.Test;
 import solver.Solver;
 import solver.constraints.IntConstraintFactory;
-import solver.search.loop.monitors.cpviz.Visualization;
-import solver.search.loop.monitors.cpviz.visualizers.*;
 import solver.variables.BoolVar;
 import solver.variables.IntVar;
 import solver.variables.VariableFactory;
@@ -163,8 +162,6 @@ public class CPVizTest {
     @Test(groups = "1s")
     public void testAllDifferent() {
         IntVar S, E, N, D, M, O, R, Y;
-        IntVar[] SEND, MORE, MONEY;
-
         Solver solver = new Solver();
 
         S = VariableFactory.enumerated("S", 0, 9, solver);
@@ -221,7 +218,7 @@ public class CPVizTest {
         visu.createTree();
         visu.createViz();
 
-        solver.search.loop.monitors.cpviz.visualizers.Element visualizer = new solver.search.loop.monitors.cpviz.visualizers.Element(index, values, value, "expanded", 13, 40);
+        Element visualizer = new Element(index, values, value, "expanded", 13, 40);
         visualizer.setMinMax(-20, 20);
 
         visu.addVisualizer(visualizer);
