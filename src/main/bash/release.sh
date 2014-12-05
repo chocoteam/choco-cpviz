@@ -20,7 +20,7 @@ git checkout -b release || exit 1
 mvn -q dependency:purge-local-repository
 
 echo "New version is ${VERSION}"
-#Update the poms
+#Update the poms:wq
 mvn versions:set -DnewVersion=${VERSION} -DgenerateBackupPoms=false
 git commit -m "initiate release ${VERSION}" -a
 
