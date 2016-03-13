@@ -142,7 +142,7 @@ public final class BoolChanneling extends Visualizer {
     protected void print(boolean focus, Decision decision) {
         writer.argumentIn(Writer._1, 3).ivar(var, Writer._1, 4).argumentOut(3);
 
-        if (decision != null && decision.getDecisionVariable() == var) {
+        if (decision != null && decision.getDecisionVariables() == var) {
             if (focus) {
                 writer.focus(Writer._1 + Writer._S + Integer.toString(1), group, type);
             } else {
@@ -154,7 +154,7 @@ public final class BoolChanneling extends Visualizer {
 
         if (decision != null) {
             for (int i = 0; i < bool.length; i++) {
-                if (decision.getDecisionVariable() == bool[i]) {
+                if (decision.getDecisionVariables() == bool[i]) {
                     if (focus) {
                         writer.focus(Writer._3 + Writer._S + Integer.toString(i + 1), group, type);
                         break;

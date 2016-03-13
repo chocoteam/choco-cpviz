@@ -76,7 +76,7 @@ import static org.chocosolver.cpviz.Show.VIZ;
  */
 
 // BEWARE: indices must start at 1
-public class Visualization implements IMonitorClose, IMonitorInitialize, IMonitorInitPropagation,
+public class Visualization implements IMonitorClose, IMonitorInitialize,
         IMonitorDownBranch, IMonitorContradiction, IMonitorSolution {
 
     private String pbid;
@@ -135,7 +135,7 @@ public class Visualization implements IMonitorClose, IMonitorInitialize, IMonito
             e.printStackTrace();
         }
         configuration.printf(CPVizConstant.C_CONF_TAG_IN, dir, pbid);
-        solver.getSearchLoop().plugSearchMonitor(this);
+        solver.plugMonitor(this);
     }
 
     /**
@@ -278,17 +278,10 @@ public class Visualization implements IMonitorClose, IMonitorInitialize, IMonito
 
     @Override
     public void beforeInitialize() {
-    }
-
-    @Override
-    public void afterInitialize() {
         node_id = 0;
         parent_id.set(0);
         state_id = 1;
-    }
 
-    @Override
-    public void beforeInitialPropagation() {
         if (tree != null) {
             tree.printf(T_ROOT_TAG);
         }
@@ -299,7 +292,7 @@ public class Visualization implements IMonitorClose, IMonitorInitialize, IMonito
     }
 
     @Override
-    public void afterInitialPropagation() {
+    public void afterInitialize() {
         if (visualization != null) {
             printVisualizerStat(state_id, 0, false, null);
         }
@@ -307,23 +300,13 @@ public class Visualization implements IMonitorClose, IMonitorInitialize, IMonito
     }
 
     @Override
-    public void beforeDownLeftBranch() {
+    public void beforeDownBranch(boolean left) {
     }
 
     @Override
-    public void afterDownLeftBranch() {
+    public void afterDownBranch(boolean left) {
         node();
     }
-
-    @Override
-    public void beforeDownRightBranch() {
-    }
-
-    @Override
-    public void afterDownRightBranch() {
-        node();
-    }
-
 
     @Override
     public void onContradiction(ContradictionException cex) {
@@ -334,7 +317,7 @@ public class Visualization implements IMonitorClose, IMonitorInitialize, IMonito
         node_id++;
         Decision currentDecision = solver.getSearchLoop().getLastDecision();
         if (tree != null) {
-            Object bo = currentDecision.getDecisionVariable();
+            Object bo = currentDecision.getDecisionVariables();
             String name = bo.toString();
             String dsize = "?";
             if (bo instanceof IntVar) {

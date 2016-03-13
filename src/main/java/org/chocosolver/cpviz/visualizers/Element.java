@@ -90,7 +90,7 @@ public final class Element extends Visualizer {
     protected void print(boolean focus, Decision decision) {
         writer.argumentIn(Writer._1, 3).ivar(index, Writer._1, 4).argumentOut(3);
 
-        if (decision != null && decision.getDecisionVariable() == index) {
+        if (decision != null && decision.getDecisionVariables() == index) {
             if (focus) {
                 writer.focus(Writer._1 + Writer._S + Integer.toString(1), group, type);
             } else {
@@ -100,7 +100,7 @@ public final class Element extends Visualizer {
         writer.argumentIn(Writer._2, 3).array(values, 4).argumentOut(3);
 
         writer.argumentIn(Writer._3, 3).ivar(value, Writer._3, 4).argumentOut(3);
-        if (decision != null && decision.getDecisionVariable() == value) {
+        if (decision != null && decision.getDecisionVariables() == value) {
             if (focus) {
                 writer.focus(Writer._3 + Writer._S + Integer.toString(3), group, type);
             } else {
