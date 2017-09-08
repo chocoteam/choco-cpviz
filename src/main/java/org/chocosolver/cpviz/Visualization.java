@@ -34,6 +34,7 @@ import org.chocosolver.solver.search.loop.monitors.*;
 import org.chocosolver.solver.search.strategy.decision.Decision;
 import org.chocosolver.solver.variables.IntVar;
 import org.chocosolver.solver.variables.SetVar;
+import solver.search.loop.monitors.IMonitorInitPropagation;
 
 import java.io.File;
 import java.io.FileNotFoundException;

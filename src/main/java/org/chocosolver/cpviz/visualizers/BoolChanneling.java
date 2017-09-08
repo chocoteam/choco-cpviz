@@ -27,7 +27,6 @@
 package org.chocosolver.cpviz.visualizers;
 
 import org.chocosolver.cpviz.Visualizer;
-import org.slf4j.Logger;
 import org.chocosolver.solver.search.strategy.decision.Decision;
 import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;

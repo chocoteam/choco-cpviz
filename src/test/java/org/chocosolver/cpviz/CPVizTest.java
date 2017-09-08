@@ -43,7 +43,7 @@ import org.testng.annotations.Test;
  */
 public class CPVizTest {
 
-    private String dir = System.getProperty("java.io.tmpdir");
+    private String dir = ".";//System.getProperty("java.io.tmpdir");
 
     @Test(groups = "1s")
     public void testNoLog() {
