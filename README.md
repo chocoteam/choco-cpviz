@@ -5,7 +5,7 @@ An extension of [Choco](https://github.com/chocoteam/choco-solver) to deal with 
 
  [choco-cpviz-3.3.1.jar](https://github.com/chocoteam/choco-cpviz/releases/tag/choco-cpviz-3.3.1)
 to the classpath, together with jar file 
-from  [choco-solver-null object or invalid expression.zip](https://github.com/chocoteam/choco-solver/releases/tag/null object or invalid expression).
+from  [choco-solver-3.3.3.zip](https://github.com/chocoteam/choco-solver/releases/tag/3.3.3).
 and add the following code, before the resolution:
 
     Visualization visu = new Visualization("aName", s, dir + "/out");

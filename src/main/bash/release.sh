@@ -41,7 +41,6 @@ mvn clean install -DskipTests  || quit "unable to install "
 echo "New version is ${VERSION}"
 YEAR=`LANG=en_US.utf8 date +"%Y"`
 sedInPlace "s%Copyright.*.%Copyright (c) $YEAR, IMT Atlantique%"  LICENSE
-Simply add
 sedInPlace "s%Simply add.*.% [choco-cpviz-${VERSION}.jar](https://github.com/chocoteam/choco-cpviz/releases/tag/choco-cpviz-${VERSION})%"  README.md
 sedInPlace "s%from .*.%from  [choco-solver-${CHOCO_VERSION}.zip](https://github.com/chocoteam/choco-solver/releases/tag/${CHOCO_VERSION}).%"  README.md
 
