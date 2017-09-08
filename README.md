@@ -1,9 +1,12 @@
 choco-cpviz
 ===========
 
-An extension of [Choco3](https://github.com/chocoteam/choco3) to deal with [cpviz](https://sourceforge.net/projects/cpviz/) library.
+An extension of [Choco](https://github.com/chocoteam/choco-solver) to deal with [cpviz](https://sourceforge.net/projects/cpviz/) library.
 
-Simply add the choco-cpviz-X.Y.Z.jar file to the classpath, together with choco-solver.X.Y.Z.jar, and add the following code, before the resolution:
+Simply add [choco-cpviz-3.3.0.jar](https://github.com/chocoteam/choco-cpviz/releases/tag/choco-cpviz-3.3.0)
+to the classpath, together with jar file 
+from [choco-solver-3.3.0.zip](https://github.com/chocoteam/choco-solver/releases/tag/3.3.0),
+and add the following code, before the resolution:
 
     Visualization visu = new Visualization("aName", s, dir + "/out");
     visu.createTree();
