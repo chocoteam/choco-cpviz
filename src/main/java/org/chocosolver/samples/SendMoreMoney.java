@@ -1,3 +1,11 @@
+/**
+ * This file is part of choco-cpviz, https://github.com/chocoteam/choco-cpviz
+ *
+ * Copyright (c) 2017-09-08T13:46:36Z, IMT Atlantique. All rights reserved.
+ *
+ * Licensed under the BSD 4-clause license.
+ * See LICENSE file in the project root for full license information.
+ */
 package org.chocosolver.samples; /**
  *  Copyright (c) 1999-2011, Ecole des Mines de Nantes
  *  All rights reserved.
