@@ -9,11 +9,10 @@
 package org.chocosolver.cpviz;
 
 import org.chocosolver.cpviz.visualizers.*;
+import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
-import org.chocosolver.solver.constraints.IntConstraintFactory;
 import org.chocosolver.solver.variables.BoolVar;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.solver.variables.VariableFactory;
 import org.chocosolver.util.tools.ArrayUtils;
 import org.testng.annotations.Test;
 
@@ -31,15 +30,16 @@ public class CPVizTest {
     public void testNoLog() {
         int n = 4;
 
-        Solver s = new Solver();
-        IntVar[] Q = VariableFactory.enumeratedArray("Q", n, 1, n, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] Q = m.intVarArray("Q", n, 1, n, false);
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 int k = j - i;
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j]));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "+", k));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "-", k));
+                m.post(m.arithm(Q[i], "!=", Q[j]));
+                m.post(m.arithm(Q[i], "!=", Q[j], "+", k));
+                m.post(m.arithm(Q[i], "!=", Q[j], "-", k));
             }
         }
         s.findAllSolutions();
@@ -49,15 +49,16 @@ public class CPVizTest {
     public void testVector() {
         int n = 4;
 
-        Solver s = new Solver();
-        IntVar[] Q = VariableFactory.enumeratedArray("Q", n, 1, n, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] Q = m.intVarArray("Q", n, 1, n, false);
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 int k = j - i;
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j]));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "+", k));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "-", k));
+                m.post(m.arithm(Q[i], "!=", Q[j]));
+                m.post(m.arithm(Q[i], "!=", Q[j], "+", k));
+                m.post(m.arithm(Q[i], "!=", Q[j], "-", k));
             }
         }
 
@@ -81,15 +82,16 @@ public class CPVizTest {
     public void testVectorSize() {
         int n = 13;
 
-        Solver s = new Solver();
-        IntVar[] Q = VariableFactory.enumeratedArray("Q", n, 1, n, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] Q = m.intVarArray("Q", n, 1, n, false);
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 int k = j - i;
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j]));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "+", k));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "-", k));
+                m.post(m.arithm(Q[i], "!=", Q[j]));
+                m.post(m.arithm(Q[i], "!=", Q[j], "+", k));
+                m.post(m.arithm(Q[i], "!=", Q[j], "-", k));
             }
         }
 
@@ -113,15 +115,16 @@ public class CPVizTest {
     public void testVectorWaterfall() {
         int n = 4;
 
-        Solver s = new Solver();
-        IntVar[] Q = VariableFactory.enumeratedArray("Q", n, 1, n, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] Q = m.intVarArray("Q", n, 1, n, false);
 
         for (int i = 0; i < n; i++) {
             for (int j = i + 1; j < n; j++) {
                 int k = j - i;
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j]));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "+", k));
-                s.post(IntConstraintFactory.arithm(Q[i], "!=", Q[j], "-", k));
+                m.post(m.arithm(Q[i], "!=", Q[j]));
+                m.post(m.arithm(Q[i], "!=", Q[j], "+", k));
+                m.post(m.arithm(Q[i], "!=", Q[j], "-", k));
             }
         }
 
@@ -144,22 +147,23 @@ public class CPVizTest {
     @Test(groups = "1s")
     public void testAllDifferent() {
         IntVar S, E, N, D, M, O, R, Y;
-        Solver solver = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
 
-        S = VariableFactory.enumerated("S", 0, 9, solver);
-        E = VariableFactory.enumerated("E", 0, 9, solver);
-        N = VariableFactory.enumerated("N", 0, 9, solver);
-        D = VariableFactory.enumerated("D", 0, 9, solver);
-        M = VariableFactory.enumerated("M", 0, 9, solver);
-        O = VariableFactory.enumerated("0", 0, 9, solver);
-        R = VariableFactory.enumerated("R", 0, 9, solver);
-        Y = VariableFactory.enumerated("Y", 0, 9, solver);
+        S = m.intVar("S", 0, 9, false);
+        E = m.intVar("E", 0, 9, false);
+        N = m.intVar("N", 0, 9, false);
+        D = m.intVar("D", 0, 9, false);
+        M = m.intVar("M", 0, 9, false);
+        O = m.intVar("0", 0, 9, false);
+        R = m.intVar("R", 0, 9, false);
+        Y = m.intVar("Y", 0, 9, false);
 
-        solver.post(IntConstraintFactory.arithm(S, "!=", 0));
-        solver.post(IntConstraintFactory.arithm(M, "!=", 0));
-        solver.post(IntConstraintFactory.arithm(S, "!=", 0));
-        solver.post(IntConstraintFactory.arithm(M, "!=", 0));
-        solver.post(IntConstraintFactory.alldifferent(new IntVar[]{S, E, N, D, M, O, R, Y}, "BC"));
+        m.post(m.arithm(S, "!=", 0));
+        m.post(m.arithm(M, "!=", 0));
+        m.post(m.arithm(S, "!=", 0));
+        m.post(m.arithm(M, "!=", 0));
+        m.post(m.allDifferent(new IntVar[]{S, E, N, D, M, O, R, Y}, "BC"));
 
 
         IntVar[] ALL = new IntVar[]{
@@ -171,9 +175,9 @@ public class CPVizTest {
                 1000, 100, 10, 1,
                 -10000, -1000, -100, -10, -1
         };
-        solver.post(IntConstraintFactory.scalar(ALL, COEFFS, VariableFactory.fixed(0, solver)));
+        m.post(m.scalar(ALL, COEFFS, "=", m.intVar(0)));
 
-        Visualization visu = new Visualization("AllDifferent", solver, dir);
+        Visualization visu = new Visualization("AllDifferent", s, dir);
 
         visu.createTree();
         visu.createViz();
@@ -182,18 +186,19 @@ public class CPVizTest {
 
         visu.addVisualizer(visualizer);
 
-        solver.findSolution();
+        s.findSolution();
 
 
     }
 
     @Test(groups = "1s")
     public void testElement() {
-        Solver s = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
         int[] values = new int[]{1, 2, 0, 4, -10};
-        IntVar index = VariableFactory.enumerated("index", -3, 10, s);
-        IntVar value = VariableFactory.enumerated("value", -20, 20, s);
-        s.post(IntConstraintFactory.element(index, values, value, 0, "detect"));
+        IntVar index = m.intVar("index", -3, 10, false);
+        IntVar value = m.intVar("value", -20, 20, false);
+        m.post(m.element(value, values, index, 0));
 
         Visualization visu = new Visualization("Element", s, dir );
 
@@ -209,10 +214,11 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testBinaryVector() {
-        Solver s = new Solver();
-        IntVar var = VariableFactory.enumerated("var", 1, 8, s);
-        BoolVar[] bool = VariableFactory.boolArray("b", 8, s);
-        s.post(IntConstraintFactory.boolean_channeling(bool, var, 0));
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar var = m.intVar("var", 1, 8, false);
+        BoolVar[] bool = m.boolVarArray("b", 8);
+        m.post(m.boolsIntChanneling(bool, var, 0));
 
         Visualization visu = new Visualization("BinaryVector", s, dir );
 
@@ -232,31 +238,32 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testDomainMatrix() {
-        Solver s = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
         int n = 3;
         final int ub = n * n;
         final int ms = n * (n * n + 1) / 2;
-        IntVar[][] vars = VariableFactory.enumeratedMatrix("v", n, n, 1, ub, s);
+        IntVar[][] vars = m.intVarMatrix("v", n, n, 1, ub, false);
         // All cells of the matrix must be different
-        s.post(IntConstraintFactory.alldifferent(ArrayUtils.flatten(vars), "BC"));
+        m.allDifferent(ArrayUtils.flatten(vars), "BC").post();
         final IntVar[] varDiag1 = new IntVar[n];
         final IntVar[] varDiag2 = new IntVar[n];
         for (int i = 0; i < n; i++) {
             // All rows must be equal to the magic sum
-            s.post(IntConstraintFactory.sum(vars[i], VariableFactory.fixed(ms, s)));
+            m.post(m.sum(vars[i], "=", m.intVar(ms)));
             // All columns must be equal to the magic sum
-            s.post(IntConstraintFactory.sum(ArrayUtils.getColumn(vars, i), VariableFactory.fixed(ms, s)));
+            m.post(m.sum(ArrayUtils.getColumn(vars, i), "=", m.intVar(ms)));
             //record diagonals variable
             varDiag1[i] = vars[i][i];
             varDiag2[i] = vars[(n - 1) - i][i];
         }
         // Every diagonal have to be equal to the magic sum
-        s.post(IntConstraintFactory.sum(varDiag1, VariableFactory.fixed(ms, s)));
-        s.post(IntConstraintFactory.sum(varDiag2, VariableFactory.fixed(ms, s)));
+        m.post(m.sum(varDiag1, "=", m.intVar(ms)));
+        m.post(m.sum(varDiag2, "=", m.intVar(ms)));
         //symmetry breaking constraint: enforce that the upper left corner contains the minimum corner value.
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[0][n - 1]));
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[n - 1][n - 1]));
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[n - 1][0]));
+        m.post(m.arithm(vars[0][0], "<", vars[0][n - 1]));
+        m.post(m.arithm(vars[0][0], "<", vars[n - 1][n - 1]));
+        m.post(m.arithm(vars[0][0], "<", vars[n - 1][0]));
 
         Visualization visu = new Visualization("DomainMatrix", s, dir );
 
@@ -275,31 +282,32 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testAllDifferentMatrix() {
-        Solver s = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
         int n = 3;
         final int ub = n * n;
         final int ms = n * (n * n + 1) / 2;
-        IntVar[][] vars = VariableFactory.enumeratedMatrix("v", n, n, 1, ub, s);
+        IntVar[][] vars = m.intVarMatrix("v", n, n, 1, ub, false);
         // All cells of the matrix must be different
-        s.post(IntConstraintFactory.alldifferent(ArrayUtils.flatten(vars), "BC"));
+        m.post(m.allDifferent(ArrayUtils.flatten(vars), "BC"));
         final IntVar[] varDiag1 = new IntVar[n];
         final IntVar[] varDiag2 = new IntVar[n];
         for (int i = 0; i < n; i++) {
             // All rows must be equal to the magic sum
-            s.post(IntConstraintFactory.sum(vars[i], VariableFactory.fixed(ms, s)));
+            m.post(m.sum(vars[i], "=", m.intVar(ms)));
             // All columns must be equal to the magic sum
-            s.post(IntConstraintFactory.sum(ArrayUtils.getColumn(vars, i), VariableFactory.fixed(ms, s)));
+            m.post(m.sum(ArrayUtils.getColumn(vars, i), "=", m.intVar(ms)));
             //record diagonals variable
             varDiag1[i] = vars[i][i];
             varDiag2[i] = vars[(n - 1) - i][i];
         }
         // Every diagonal have to be equal to the magic sum
-        s.post(IntConstraintFactory.sum(varDiag1, VariableFactory.fixed(ms, s)));
-        s.post(IntConstraintFactory.sum(varDiag2, VariableFactory.fixed(ms, s)));
+        m.post(m.sum(varDiag1, "=", m.intVar(ms)));
+        m.post(m.sum(varDiag2, "=", m.intVar(ms)));
         //symmetry breaking constraint: enforce that the upper left corner contains the minimum corner value.
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[0][n - 1]));
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[n - 1][n - 1]));
-        s.post(IntConstraintFactory.arithm(vars[0][0], "<", vars[n - 1][0]));
+        m.post(m.arithm(vars[0][0], "<", vars[0][n - 1]));
+        m.post(m.arithm(vars[0][0], "<", vars[n - 1][n - 1]));
+        m.post(m.arithm(vars[0][0], "<", vars[n - 1][0]));
 
 
         Visualization visu = new Visualization("AllDifferentMatrix", s, dir );
@@ -319,17 +327,18 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testBinaryMatrix() {
-        Solver solver = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
         int n = 4;
-        IntVar[] var = VariableFactory.enumeratedArray("var", n, 0, n - 1, solver);
+        IntVar[] var = m.intVarArray("var", n, 0, n - 1, false);
         BoolVar[][] bool = new BoolVar[n][n];
         for (int i = 0; i < n; i++) {
-            bool[i] = VariableFactory.boolArray("bool_" + i, n, solver);
-            solver.post(IntConstraintFactory.boolean_channeling(bool[i], var[i], 0));
+            bool[i] = m.boolVarArray("bool_" + i, n);
+            m.post(m.boolsIntChanneling(bool[i], var[i], 0));
         }
-        solver.post(IntConstraintFactory.alldifferent(var, "BC"));
+        m.post(m.allDifferent(var, "BC"));
 
-        Visualization visu = new Visualization("BinaryMatrix", solver, dir );
+        Visualization visu = new Visualization("BinaryMatrix", s, dir );
 
         visu.createTree();
         visu.createViz();
@@ -339,16 +348,17 @@ public class CPVizTest {
 
         visu.addVisualizer(visualizer);
 
-        solver.findSolution();
+        s.findSolution();
 
     }
 
     @Test(groups = "1s")
     public void testBoolChanneling() {
-        Solver s = new Solver();
-        IntVar var = VariableFactory.enumerated("var", 1, 8, s);
-        BoolVar[] bool = VariableFactory.boolArray("b", 8, s);
-        s.post(IntConstraintFactory.boolean_channeling(bool, var, 0));
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar var = m.intVar("var", 1, 8, false);
+        BoolVar[] bool = m.boolVarArray("b", 8);
+        m.post(m.boolsIntChanneling(bool, var, 0));
 
         Visualization visu = new Visualization("BoolChanneling", s, dir );
 
@@ -396,11 +406,12 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testLexLe() {
-        Solver s = new Solver();
+        Model m = new Model();
+        Solver s = m.getSolver();
 
-        IntVar[] X = VariableFactory.enumeratedArray("X", 3, 0, 1, s);
-        IntVar[] Y = VariableFactory.enumeratedArray("Y", 3, 0, 1, s);
-        s.post(IntConstraintFactory.lex_less_eq(X, Y));
+        IntVar[] X = m.intVarArray("X", 3, 0, 1, false);
+        IntVar[] Y = m.intVarArray("Y", 3, 0, 1, false);
+        m.post(m.lexLessEq(X, Y));
 
         Visualization visu = new Visualization("LexLe", s, dir );
         visu.createTree();
@@ -415,11 +426,12 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testInverse() {
-        Solver s = new Solver();
-        IntVar[] X = VariableFactory.enumeratedArray("X", 3, 0, 2, s);
-        IntVar[] Y = VariableFactory.enumeratedArray("Y", 3, 0, 2, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] X = m.intVarArray("X", 3, 0, 2, false);
+        IntVar[] Y = m.intVarArray("Y", 3, 0, 2, false);
 
-        s.post(IntConstraintFactory.inverse_channeling(X, Y, 0, 0));
+        m.post(m.inverseChanneling(X, Y, 0, 0));
 
         Visualization visu = new Visualization("Inverse", s, dir );
         visu.createTree();
@@ -436,18 +448,19 @@ public class CPVizTest {
 
     @Test(groups = "1s")
     public void testGcc() {
-        Solver s = new Solver();
-        IntVar[] X = VariableFactory.enumeratedArray("X", 3, 0, 4, s);
+        Model m = new Model();
+        Solver s = m.getSolver();
+        IntVar[] X = m.intVarArray("X", 3, 0, 4, false);
         int[] values = new int[]{1, 2, 3};
         int[] low = new int[]{0, 1, 0};
         int[] up = new int[]{1, 2, 1};
         IntVar[] cards = new IntVar[]{
-                VariableFactory.bounded("card 0", 0, 1, s),
-                VariableFactory.bounded("card 1", 1, 2, s),
-                VariableFactory.bounded("card 2", 0, 1, s)
+                m.intVar("card 0", 0, 1, true),
+                m.intVar("card 1", 1, 2, true),
+                m.intVar("card 2", 0, 1, true)
         };
 
-        s.post(IntConstraintFactory.global_cardinality(X, values, cards, false));
+        m.post(m.globalCardinality(X, values, cards, false));
 
         Visualization visu = new Visualization("Gcc", s, dir );
         visu.createTree();

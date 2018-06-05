@@ -35,10 +35,9 @@ package org.chocosolver.samples; /**
 
 import org.chocosolver.cpviz.Visualization;
 import org.chocosolver.cpviz.visualizers.Vector;
+import org.chocosolver.solver.Model;
 import org.chocosolver.solver.Solver;
-import org.chocosolver.solver.constraints.IntConstraintFactory;
 import org.chocosolver.solver.variables.IntVar;
-import org.chocosolver.solver.variables.VariableFactory;
 import org.slf4j.LoggerFactory;
 
 
@@ -49,30 +48,32 @@ import org.slf4j.LoggerFactory;
  *
  * @version 2.0.1</br>
  */
-public class SendMoreMoney extends AbstractProblem {
+public class SendMoreMoney{
+
+    Model model;
+    Solver solver;
 
     IntVar S, E, N, D, M, O, R, Y;
     IntVar[] ALL;
 
-    @Override
     public void createSolver() {
-        solver = new Solver("SendMoreMoney");
+        model = new Model("SendMoreMoney");
+        solver = model.getSolver();
     }
 
-    @Override
     public void buildModel() {
-        S = VariableFactory.enumerated("S", 0, 9, solver);
-        E = VariableFactory.enumerated("E", 0, 9, solver);
-        N = VariableFactory.enumerated("N", 0, 9, solver);
-        D = VariableFactory.enumerated("D", 0, 9, solver);
-        M = VariableFactory.enumerated("M", 0, 9, solver);
-        O = VariableFactory.enumerated("0", 0, 9, solver);
-        R = VariableFactory.enumerated("R", 0, 9, solver);
-        Y = VariableFactory.enumerated("Y", 0, 9, solver);
+        S = model.intVar("S", 0, 9, false);
+        E = model.intVar("E", 0, 9, false);
+        N = model.intVar("N", 0, 9, false);
+        D = model.intVar("D", 0, 9, false);
+        M = model.intVar("M", 0, 9, false);
+        O = model.intVar("0", 0, 9, false);
+        R = model.intVar("R", 0, 9, false);
+        Y = model.intVar("Y", 0, 9, false);
 
-        solver.post(IntConstraintFactory.arithm(S, "!=", 0));
-        solver.post(IntConstraintFactory.arithm(M, "!=", 0));
-        solver.post(IntConstraintFactory.alldifferent(new IntVar[]{S, E, N, D, M, O, R, Y}, "BC"));
+        model.post(model.arithm(S, "!=", 0));
+        model.post(model.arithm(M, "!=", 0));
+        model.post(model.allDifferent(new IntVar[]{S, E, N, D, M, O, R, Y}, "BC"));
 
 
         ALL = new IntVar[]{
@@ -84,18 +85,16 @@ public class SendMoreMoney extends AbstractProblem {
                 1000, 100, 10, 1,
                 -10000, -1000, -100, -10, -1
         };
-        solver.post(IntConstraintFactory.scalar(ALL, COEFFS, VariableFactory.fixed(0, solver)));
+        model.post(model.scalar(ALL, COEFFS, "=", model.intVar(0)));
     }
 
-    @Override
     public void configureSearch() {
     }
 
-    @Override
     public void solve() {
         //-------> Visualization declaration starts here <-------//
         // create a new instance of Visualization
-        Visualization visu = new Visualization("SendMoreMoney", solver, System.getProperty("user.dir"));
+        Visualization visu = new Visualization("SendMoreMoney", model.getSolver(), System.getProperty("user.dir"));
         visu.createTree(); // declare tree search visualization
         visu.createViz(); // declare visualizers container
         // create a new Vector visualizer
@@ -103,10 +102,9 @@ public class SendMoreMoney extends AbstractProblem {
                 "expanded", 0, 0, 8, 10, "SENDMORY", 0, 9);
         // add the vector to the visualizers container
         visu.addVisualizer(visualizer);
-        solver.findSolution();
+        solver.solve();
     }
 
-    @Override
     public void prettyOut() {
         LoggerFactory.getLogger("bench").info("SEND + MORE = MONEY ");
         StringBuilder st = new StringBuilder();
@@ -118,7 +116,12 @@ public class SendMoreMoney extends AbstractProblem {
     }
 
     public static void main(String[] args) {
-        new SendMoreMoney().execute(args);
+        SendMoreMoney sendMoreMoney = new SendMoreMoney();
+        sendMoreMoney.createSolver();
+        sendMoreMoney.buildModel();
+        sendMoreMoney.configureSearch();
+        sendMoreMoney.solve();
+        sendMoreMoney.prettyOut();
     }
 
 }

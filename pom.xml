@@ -44,7 +44,7 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <slf4jVersion>1.6.6</slf4jVersion>
-        <choco.version>3.3.3</choco.version>
+        <choco.version>4.0.6</choco.version>
     </properties>
 
     <scm>

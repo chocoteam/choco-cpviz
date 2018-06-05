@@ -297,9 +297,9 @@ public class Visualization implements IMonitorClose, IMonitorInitialize,
 
     void node() {
         node_id++;
-        Decision currentDecision = solver.getSearchLoop().getLastDecision();
+        Decision currentDecision = solver.getDecisionPath().getLastDecision();
         if (tree != null) {
-            Object bo = currentDecision.getDecisionVariables();
+            Object bo = currentDecision.getDecisionVariable();
             String name = bo.toString();
             String dsize = "?";
             if (bo instanceof IntVar) {
@@ -309,7 +309,8 @@ public class Visualization implements IMonitorClose, IMonitorInitialize,
             } else if (bo instanceof SetVar) {
                 SetVar svar = (SetVar) bo;
                 name = svar.getName();
-                dsize = Integer.toString(svar.getEnvelopeSize());
+                //TODO method getEnvelopeSize removed, what should be used instead of it ?
+                //dsize = Integer.toString(svar.getEnvelopeSize());
             }
             if (hasFailed) {
                 hasFailed = false;
