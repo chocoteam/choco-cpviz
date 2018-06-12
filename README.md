@@ -8,6 +8,8 @@ to the classpath, together with jar file
 from  [choco-solver-3.3.3.zip](https://github.com/chocoteam/choco-solver/releases/tag/3.3.3).
 and add the following code, before the resolution:
 
+Alternatively, the current version of the source code works with Choco-4.0.6. 
+
 ```java
 Visualization visu = new Visualization("aName", s, dir + "/out");
 visu.createTree();
