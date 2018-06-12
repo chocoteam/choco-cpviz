@@ -77,7 +77,7 @@ public class DomainMatrix extends Visualizer {
         if (decision != null) {
             for (int i = 0; i < vars.length; i++) {
                 for (int j = 0; j < vars[i].length; j++) {
-                    if (decision.getDecisionVariables()== vars[i][j]) {
+                    if (decision.getDecisionVariable()== vars[i][j]) {
                         if (focus) {
                             writer.focus((i + 1) + Writer._S + (j + 1), group);
                         } else {
