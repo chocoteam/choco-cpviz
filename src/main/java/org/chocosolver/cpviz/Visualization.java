@@ -309,8 +309,7 @@ public class Visualization implements IMonitorClose, IMonitorInitialize,
             } else if (bo instanceof SetVar) {
                 SetVar svar = (SetVar) bo;
                 name = svar.getName();
-                //TODO method getEnvelopeSize removed, what should be used instead of it ?
-                //dsize = Integer.toString(svar.getEnvelopeSize());
+                dsize = Integer.toString(svar.getUB().size());
             }
             if (hasFailed) {
                 hasFailed = false;
